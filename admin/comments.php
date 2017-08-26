@@ -19,7 +19,7 @@
                         
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="admin-index.php">Dashboard</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-file"></i> View All Comments
@@ -28,20 +28,12 @@
                         
                         <div class="col-xs-12">
                             <?php
-                                $action = '';
-                                if(isset($_GET['action'])){
-                                    $action = $_GET['action'];    
+                                $route = '';
+                                if(isset($_GET['route'])){
+                                    $route = $_GET['route'];    
                                 }
-                                switch($action){
-                                    case 'add_post': include "includes/add_post.php";
-                                        break;
-                                    case 'add_post_action': include "includes/add_post_action.php";
-                                        break;
-                                    case 'edit_post': include "includes/edit_post.php";
-                                        break;
-                                    case 'edit_post_action': include "includes/edit_post_action.php";
-                                        break;
-                                    case 'delete_comment': include "includes/delete_post.php";
+                                switch($route){
+                                    case 'updatecomment': include "includes/comment_action.php";
                                         break;
                                     default: include "includes/view_all_comments.php";
                                         break;

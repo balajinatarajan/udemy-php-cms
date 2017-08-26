@@ -31,9 +31,9 @@ if(isset($_POST['edit_post'])){
     
     $update_post_query = mysqli_query($connection, $update_post);
     if($update_post_query){
-        echo "<div class='alert alert-success'>Post Successfully updated!</div>";
+        showMsg('Post Successfully updated!','success');
     } else {
-        echo "<div class='alert alert-danger'>Problem updating post!".mysqli_error($connection)."</div>";
+        showMsg("Problem updating post!".mysqli_error($connection),'danger');
     }
         
 }

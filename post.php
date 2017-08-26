@@ -62,9 +62,9 @@
                     $com_ins_q = mysqli_query($connection, $comment_insert_qs);
                     
                     if($com_ins_q){
-                        echo "<div class='alert alert-success'>Comment Successfully added and is awaiting moderation! Thank you for commenting!</div>";
+                        showMsg('Comment Successfully added and is awaiting moderation! Thank you for commenting!','success');
                     } else {
-                        echo "<div class='alert alert-danger'>Problem adding comment!</div>";
+                        showMsg('Problem adding comment!','danger');
                     }
                 }
                ?>

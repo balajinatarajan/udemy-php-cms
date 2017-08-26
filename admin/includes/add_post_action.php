@@ -24,9 +24,9 @@ if(isset($_POST['create_post'])){
     
     $insert_post_query = mysqli_query($connection, $insert_post);
     if($insert_post_query){
-        echo "<div class='alert alert-success'>Post Successfully created!</div>";
+        showMsg('Post Successfully created!','success');
     } else {
-        echo "<div class='alert alert-danger'>Problem creating new post!".mysqli_error($connection)."</div>";
+        showMsg("Problem creating new post!".mysqli_error($connection),'danger');
     }
         
 }

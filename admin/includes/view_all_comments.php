@@ -1,3 +1,20 @@
+<?php
+if(!empty($_GET['showmsg'])){
+    switch($_GET['showmsg']){
+        case "statusupdated": showMsgDis('Comment Status Updated!','success');
+            break;
+        case "statusnotupdated": showMsgDis('Problem updating comment!','danger');
+            break;
+        case "deleted": showMsgDis('Comment Deleted!','success');
+            break;
+        case "notdeleted": showMsgDis('Problem deleting comment!','danger');
+            break;
+        default: //nothing to do
+            break;
+    }
+}
+?> 
+
 <table class="table table-bordered table-hover">
     <tr>
         <th>ID</th>
@@ -34,9 +51,9 @@ while($row = mysqli_fetch_assoc($comments)){
 
         echo "<tr>". printColumns([$comment_id,$comment_author,$comment_email,$comment_content,$comment_status,$comment_date]).
             "<td><a href='../post.php?post_id={$comment_post_id}' target='_blank'>{$comment_post_title}</a></td>".
-        "<td><a href='comments.php?action=approve_comment&comment_id={$comment_id}'>Approve</a></td>".
-        "<td><a href='comments.php?action=unapprove_comment&comment_id={$comment_id}'>Unapprove</a></td>".
-        "<td><a href='comments.php?action=delete_comment&comment_id={$comment_id}'>Delete</a></td></tr>";
+        "<td><a href='comments.php?route=updatecomment&action=approve_comment&comment_id={$comment_id}'>Approve</a></td>".
+        "<td><a href='comments.php?route=updatecomment&action=unapprove_comment&comment_id={$comment_id}'>Unapprove</a></td>".
+        "<td><a href='comments.php?route=updatecomment&action=delete_comment&comment_id={$comment_id}'>Delete</a></td></tr>";
 }
 ?>
 </table>

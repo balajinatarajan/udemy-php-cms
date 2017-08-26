@@ -7,10 +7,10 @@ function updateCategory($cat_id_upd,$cat_title_upd){
                                  
      $update_cat_query = mysqli_query($connection, $update_cat);
      if($update_cat_query){
-         echo "<div class='alert alert-success'>Category Successfully Updated!</div>";
+         showMsg('Category Successfully Updated!','success');
          header('Location: http://localhost:8888/cms/admin/categories.php');
      } else {
-         echo "<div class='alert alert-danger'>Problem updating Category!</div>";
+         showMsg('Problem updating Category!','danger');
      }
 }
 
@@ -22,9 +22,9 @@ function deleteCategory($cat_id){
 
      $cat_delete_query = mysqli_query($connection, $cat_delete);
      if($cat_delete_query){
-         echo "<div class='alert alert-success'>Category Successfully Deleted!</div>";
+         showMsg('Category Successfully Deleted!','success');
      } else {
-         echo "<div class='alert alert-danger'>Category does not exists or there is some problem deleting category!</div>";
+         showMsg('Category does not exists or there is some problem deleting category!','danger');
      }
 }
 
@@ -39,16 +39,16 @@ function addCategory($cat_title){
          $cat_select = "SELECT * FROM categories WHERE cat_title = '{$cat_title}'";
          $cat_select_query = mysqli_query($connection, $cat_select);
          if(mysqli_num_rows($cat_select_query) > 0){
-             echo "<div class='alert alert-danger'>Category Name already exists!</div>";
+             showMsg('Category Name already exists!','danger');
          } else {
              //insert category
              $cat_insert = "INSERT INTO categories(cat_title) VALUE ('$cat_title')";
              $cat_insert_query = mysqli_query($connection, $cat_insert);
 
              if($cat_insert_query){
-                 echo "<div class='alert alert-success'>Category Successfully added!</div>";
+                 showMsg('Category Successfully added!','success');
              } else {
-                 echo "<div class='alert alert-danger'>Problem adding category!</div>";
+                 showMsg('Problem adding category!','danger');
              }
          }
      }
@@ -66,5 +66,8 @@ function showMsg($msg, $msgtype){
     echo "<div class='alert alert-{$msgtype}'>{$msg}</div>";
 }
 
+function showMsgDis($msg, $msgtype){
+    echo "<div class='alert alert-{$msgtype} alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>{$msg}</div>";
+}
 
 ?>
