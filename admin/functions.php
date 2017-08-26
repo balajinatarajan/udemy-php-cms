@@ -62,4 +62,9 @@ function printColumns($cols){
     return $rowString;
 }
 
+function showMsg($msg, $msgtype){
+    echo "<div class='alert alert-{$msgtype}'>{$msg}</div>";
+}
+
+
 ?>

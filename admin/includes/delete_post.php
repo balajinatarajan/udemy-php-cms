@@ -1,4 +1,5 @@
 <?php
+if(!empty($_GET['post_id'])){
 $post_id = mysqli_real_escape_string($connection, $_GET['post_id']);
 if(!empty($post_id)){
     $post_image = '';
@@ -10,14 +11,18 @@ if(!empty($post_id)){
     }
     //delete image
     if($post_image != '' && !empty($post_image)){
-        unlink("../images/".$post_image);
+       // unlink("../images/".$post_image);
+        //other posts could share this image
     }
     //delete asset
     $delete = "DELETE FROM posts WHERE post_id = {$post_id}";
     if(mysqli_query($connection, $delete)){
-        echo "<div class='alert alert-success'>Post Successfully Deleted!</div>";
+        showMsg('Post Successfully Deleted!','success');
     } else {
-        echo "<div class='alert alert-danger'>Post could not be Deleted!</div>";
+        showMsg('Post could not be Deleted!','danger');
     }
 } 
+} else {
+    showMsg('Oops! No post id in url!', 'danger');
+}
 ?>
