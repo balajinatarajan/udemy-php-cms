@@ -30,21 +30,14 @@
                             <?php
                                 $action = '';
                                 if(isset($_GET['action'])){
-                                    $action = $_GET['action'];    
-                                }
-                                switch($action){
-                                    case 'add_post': include "includes/add_post.php";
-                                        break;
-                                    case 'add_post_action': include "includes/add_post_action.php";
-                                        break;
-                                    case 'edit_post': include "includes/edit_post.php";
-                                        break;
-                                    case 'edit_post_action': include "includes/edit_post_action.php";
-                                        break;
-                                    case 'delete_post': include "includes/delete_post.php";
-                                        break;
-                                    default: include "includes/view_all_posts.php";
-                                        break;
+                                    $action = $_GET['action'];  
+                                    if(!empty($action)){
+                                        include "includes/post_action.php";
+                                    } else {
+                                        include "includes/view_all_posts.php";
+                                    }
+                                } else {
+                                    include "includes/view_all_posts.php";
                                 }
                             ?>
                         </div>

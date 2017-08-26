@@ -22,7 +22,7 @@
                 $search = $_GET['search'];   
                 $search = mysqli_real_escape_string($connection, $search);
                 
-                $search_query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
+                $search_query = "SELECT * FROM posts WHERE post_status = 'publish' AND post_tags LIKE '%$search%'";
                 $search_result = mysqli_query($connection, $search_query);
                 
                 if(!$search_result){

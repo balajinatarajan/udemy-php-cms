@@ -26,7 +26,7 @@
             if($cat_q){
             $cat_id = mysqli_fetch_assoc($cat_q)['cat_id'];
                 
-            $posts_query = "SELECT * FROM posts WHERE post_category_id = {$cat_id}";
+            $posts_query = "SELECT * FROM posts WHERE post_status = 'publish' AND post_category_id = {$cat_id}";
             $posts = mysqli_query($connection, $posts_query);
             if(mysqli_num_rows($posts) == 0){
                 echo "<div class='alert alert-danger'>No posts in this category!</div>";

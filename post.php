@@ -21,7 +21,7 @@
             $post_id = mysqli_real_escape_string($connection, $_GET['post_id']);
             if($post_id != '' && !empty($post_id)){
             
-            $posts_query = "SELECT * FROM posts WHERE post_id = {$post_id}";
+            $posts_query = "SELECT * FROM posts WHERE post_status = 'publish' AND post_id = {$post_id}";
             $posts = mysqli_query($connection, $posts_query);
             while($row = mysqli_fetch_assoc($posts)){
                 $post_title = $row['post_title'];
@@ -29,6 +29,7 @@
                 $post_date = $row['post_date'];
                 $post_content = $row['post_content'];
                 $post_image = $row['post_image'];
+                $post_tags = $row['post_tags'];
                 ?>
                 <h2>
                     <?php echo $post_title;?>
@@ -41,7 +42,12 @@
                 <img class="img-responsive" src="images/<?php echo $post_image;?>" alt="">
                 <hr>
                 <p><?php echo $post_content;?></p>
-
+                <hr>
+                <?php $tags = explode(",",$post_tags);
+                foreach($tags as $tag){
+                    echo "<a href='#'><span class='badge'>{$tag}</span></a> ";
+                }
+                    ?>
                 <hr>
                 <?php
             }
