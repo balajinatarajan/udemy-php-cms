@@ -11,11 +11,11 @@ if(!empty($_GET['showmsg'])){
             break;
         case "created": showMsgDis('New Post Created!','success');
             break;
-        case "notcreated": showMsgDis('Problem deleting post!','danger');
+        case "notcreated": showMsgDis('Problem creating post!','danger');
             break;
         case "updated": showMsgDis('Post updated!','success');
             break;
-        case "notUpdated": showMsgDis('Problem updating comment!','danger');
+        case "notUpdated": showMsgDis('Problem updating Post!','danger');
             break;
         default: //nothing to do
             break;
