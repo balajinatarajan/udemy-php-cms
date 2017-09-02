@@ -40,6 +40,8 @@ if(!isset($_SESSION['username'])){
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.min.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ojj4ua0l8boxbtnon1llm623onszu065lknjc3ayxpwipv86"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
 
 </head>
 
