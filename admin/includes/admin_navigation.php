@@ -14,14 +14,14 @@
             <ul class="nav navbar-right top-nav">
                <li><a href="../index.php">Home Site</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['user_firstname']." ".$_SESSION['user_lastname'];?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -38,17 +38,24 @@
                             <li>
                                 <a href="posts.php">View All Posts</a>
                             </li>
+                            <?php if(has_access('posts_crud')){?>
                             <li>
                                 <a href="posts.php?action=add_post">Add Posts</a>
                             </li>
+                            <?php } ?>
                         </ul>
                     </li>
+                    <?php if(has_access('cat_crud')){?>
                     <li>
-                        <a href="categories.php"><i class="fa fa-fw fa-folder-o"></i> Categories</a>
+                        <a href="categories.php"><i class="fa fa-fw fa-folder-o"></i> Categories </a>
                     </li>
+                    <?php } ?>
+                    <?php if(has_access('comments_mod')){?>
                     <li>
                         <a href="comments.php"><i class="fa fa-fw fa-comment"></i> Comments</a>
                     </li>
+                    <?php } ?>
+                    <?php if(has_access('users_crud')){?>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="users_dropdown" class="collapse">
@@ -60,8 +67,9 @@
                             </li>
                         </ul>
                     </li>
+                    <?php } ?>
                     <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                 </ul>
             </div>

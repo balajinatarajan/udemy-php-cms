@@ -45,6 +45,7 @@
             <a href='../images/<?php echo $user_image?>' target='_blank'><img width='100' src='../images/<?php echo $user_image?>' class='img-thumbnail'></a>
             <input type="hidden" name="user_current_image" value="<?php echo $user_image;?>">
         </div>
+        <?php if(has_access('users_role')){ ?>
         <div class="form-group">
             <label for="user_role">Role</label>
             <select name="user_role" id="user_role" class="form-control">
@@ -53,6 +54,7 @@
                 <option value="subscriber" <?php if($user_role == 'subscriber'){echo "selected";}?>>Subscriber</option>
             </select>
         </div>
+        <?php } ?>
         <div class="form-group"><button type="submit" name="edit_user" class="btn btn-primary">Update</button></div>
     </form>
 </div>

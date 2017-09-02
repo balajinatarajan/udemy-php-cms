@@ -13,7 +13,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Admin Dashboard
-                            <small>Hello admin!</small>
+                            <small>Hello <?php echo $_SESSION['username'];?>!</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -26,6 +26,17 @@
                     </div>
                 </div>
                 <!-- /.row -->
+                
+                <?php
+                if(!empty($_GET['showmsg'])){
+                    switch($_GET['showmsg']){
+                        case "profileupdated": showMsgDis('Your profile is updated successfully!','success');
+                            break;
+                        default: //nothing to do
+                            break;
+                    }
+                }
+                ?> 
 
             </div>
             <!-- /.container-fluid -->

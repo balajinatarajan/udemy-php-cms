@@ -1,5 +1,16 @@
+<?php session_start();?>
 <?php ob_start();?>
+<?php include "../includes/access_control.php";?>
+<?php
+if(!isset($_SESSION['username'])){
+    //echo !isset($_SESSION['username']);
+    header('Location: http://localhost:8888/cms?showmsg=loginrequired');
+} else if (!has_access('adminui')){
+    header('Location: http://localhost:8888/cms?showmsg=unauth');
+}
+?>
 <?php include "../includes/db.php";?>
+<?php include "functions.php"?>
 <!DOCTYPE html>
 <html lang="en">
 

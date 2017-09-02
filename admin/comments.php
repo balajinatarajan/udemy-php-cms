@@ -1,5 +1,4 @@
 <?php include "includes/admin_header.php"?>
-<?php include "functions.php"?>
 
     <div id="wrapper">
 
@@ -13,8 +12,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Admin Dashboard
-                            <small>Hello admin!</small>
+                            Comments
+                            <small>Hello <?php echo $_SESSION['username'];?>!</small>
                         </h1>
                         
                         <ol class="breadcrumb">

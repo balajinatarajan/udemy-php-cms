@@ -80,12 +80,19 @@ function editUser(){
         if($user_image != '' && !empty($user_image)){
             $update_user .= "user_image = '{$user_image}', ";
         }
-        $update_user .= "user_password = '{$user_password}', user_role = '{$user_role}' ";
+        if(!empty($user_role)){
+            $update_user .= "user_role = '{$user_role}', ";
+        }
+        $update_user .= "user_password = '{$user_password}' ";
         $update_user .= "WHERE user_id = {$user_id}";
 
         $update_user_query = mysqli_query($connection, $update_user);
         if($update_user_query){
-            header('Location: http://localhost:8888/cms/admin/users.php?showmsg=updated');
+            if($_SESSION['user_role'] == 'admin'){
+                header('Location: http://localhost:8888/cms/admin/users.php?showmsg=updated');
+            } else {
+                header('Location: http://localhost:8888/cms/admin?showmsg=profileupdated');
+            }
             //showMsg('User Successfully updated!','success');
         } else {
             header('Location: http://localhost:8888/cms/admin/users.php?showmsg=notupdated');

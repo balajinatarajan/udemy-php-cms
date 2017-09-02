@@ -15,6 +15,43 @@
             <!-- /.input-group -->
         </div>
 
+       <!-- Login well  -->
+        <div class="well">
+            
+            <?php 
+            if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'loginfailed'){
+                showMsgDis('Username and password do not match!','danger');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'loggedout'){
+                showMsgDis('Logout Successful!','success');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'loginrequired'){
+                showMsgDis('Please Login to access CMS Admin!','info');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'unauth'){
+                //showMsgDis('Please Login to access CMS Admin!','info');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'subloginsuccess'){
+                //showMsgDis('Login Successful!','success');
+            }
+            ?>
+
+            <?php if(!isset($_SESSION['user_role'])) {?>
+            <h4>Login</h4>
+            <form action="includes/login.php" method="post">
+                <div class="form-group">
+                    <input name="username" type="text" placeholder="Enter Username" class="form-control" required>
+                </div>
+                <div class="input-group">
+                    <input name="password" type="password" placeholder="Enter Password" class="form-control" required>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" name="login" type="submit">Login</button>
+                    </span>
+                </div>
+            </form>
+            <?php } else {
+            ?>
+            <h4>Welcome <?php echo $_SESSION['username'];?>!</h4> (not <?php echo $_SESSION['username'];?>?, <a href="includes/logout.php">Log out</a>)
+            <?php } ?>
+            <!-- /.input-group -->
+        </div>
+        
         <!-- Blog Categories Well -->
         <div class="well">
             <h4>Blog Categories</h4>
