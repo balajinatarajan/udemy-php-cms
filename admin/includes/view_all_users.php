@@ -27,6 +27,7 @@ if(!empty($_GET['showmsg'])){
         <th>Joined Date</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Status</th>
         <th>Image</th>
         <th>Action</th>
         <th>Action</th>
@@ -43,9 +44,10 @@ while($row = mysqli_fetch_assoc($users)){
         
         $user_image = $row['user_image'];
         $user_role = $row['user_role'];
+        $user_status = $row['user_status'];
         $user_date = $row['created_date'];
     
-        echo "<tr>". printColumns([$user_id,$user_name,$user_firstname,$user_lastname,$user_date,$user_email,$user_role]).
+        echo "<tr>". printColumns([$user_id,$user_name,$user_firstname,$user_lastname,$user_date,$user_email,$user_role,$user_status]).
             "<td><a href='../images/{$user_image}' target='_blank'><img width='100' src='../images/{$user_image}' class='img-thumbnail'></a></td>".
         "<td><a href='users.php?action=delete_user&user_id={$user_id}'>Delete</a></td>".
         "<td><a href='users.php?action=edit_user&user_id={$user_id}'>Edit</a></td></tr>";

@@ -73,6 +73,7 @@ function editUser(){
         $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
         $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
         $user_role = mysqli_real_escape_string($connection,$_POST['user_role']);
+        $user_status = mysqli_real_escape_string($connection,$_POST['user_status']);
 
         //insert user
         $update_user = "UPDATE users SET username = '{$username}', user_firstname = '{$user_firstname}', ";
@@ -82,6 +83,9 @@ function editUser(){
         }
         if(!empty($user_role)){
             $update_user .= "user_role = '{$user_role}', ";
+        }
+        if(!empty($user_status)){
+            $update_user .= "user_status = '{$user_status}', ";
         }
         $update_user .= "user_password = '{$user_password}' ";
         $update_user .= "WHERE user_id = {$user_id}";

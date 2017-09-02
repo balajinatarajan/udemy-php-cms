@@ -15,6 +15,7 @@
             $user_email = $row['user_email'];
             $user_password = $row['user_password'];
             $user_role = $row['user_role'];
+            $user_status = $row['user_status'];
         ?>
    <div class="col-xs-8">
     <form action="users.php?action=edit_user_action" method="post" enctype="multipart/form-data">
@@ -52,6 +53,15 @@
                 <option value="author" <?php if($user_role == 'author'){echo "selected";}?>>Author</option>
                 <option value="admin" <?php if($user_role == 'admin'){echo "selected";}?>>Admin</option>
                 <option value="subscriber" <?php if($user_role == 'subscriber'){echo "selected";}?>>Subscriber</option>
+            </select>
+        </div>
+        <?php } ?>
+        <?php if(has_access('users_role')){ ?>
+        <div class="form-group">
+            <label for="user_status">Status</label>
+            <select name="user_status" id="user_status" class="form-control">
+                <option value="pending" <?php if($user_status == 'pending'){echo "selected";}?>>Pending</option>
+                <option value="active" <?php if($user_status == 'active'){echo "selected";}?>>Active</option>
             </select>
         </div>
         <?php } ?>

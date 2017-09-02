@@ -29,6 +29,8 @@
                 //showMsgDis('Please Login to access CMS Admin!','info');
             } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'subloginsuccess'){
                 //showMsgDis('Login Successful!','success');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'userpending'){
+                showMsgDis('Your account needs approval! Please contact admin.','danger');
             }
             ?>
 

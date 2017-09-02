@@ -12,20 +12,26 @@ if(isset($_POST['login'])){
             $user_lastname = $row['user_lastname'];
             $user_role = $row['user_role'];
             $user_id = $row['user_id'];
-
-            //echo "Login successful";
-            session_start();
-            $_SESSION["username"] = $username;
-            $_SESSION["user_firstname"] = $user_firstname;
-            $_SESSION["user_lastname"] = $user_lastname;
-            $_SESSION["user_role"] = $user_role;
-            $_SESSION["user_id"] = $user_id;
+            $user_status = $row['user_status'];
             
-            if($user_role == 'subscriber'){
-                header('Location: http://localhost:8888/cms?showmsg=subloginsuccess');
+            if($user_status == 'pending'){
+                header('Location: http://localhost:8888/cms?showmsg=userpending');
             } else {
-                header('Location: http://localhost:8888/cms/admin');   
+                //echo "Login successful";
+                session_start();
+                $_SESSION["username"] = $username;
+                $_SESSION["user_firstname"] = $user_firstname;
+                $_SESSION["user_lastname"] = $user_lastname;
+                $_SESSION["user_role"] = $user_role;
+                $_SESSION["user_id"] = $user_id;
+
+                if($user_role == 'subscriber'){
+                    header('Location: http://localhost:8888/cms?showmsg=subloginsuccess');
+                } else {
+                    header('Location: http://localhost:8888/cms/admin');   
+                }   
             }
+            
         } else {
             //echo "Login failed";
             header('Location: http://localhost:8888/cms?showmsg=loginfailed');

@@ -70,4 +70,66 @@ function showMsgDis($msg, $msgtype){
     echo "<div class='alert alert-{$msgtype} alert-dismissable'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>{$msg}</div>";
 }
 
+/* dashboard functions */
+
+function getCount($table){
+    global $connection;
+    
+    $count_qs = "SELECT count(*) AS count FROM {$table}";
+    $count_q = mysqli_query($connection, $count_qs);
+    
+    if($count_q){
+        return mysqli_fetch_assoc($count_q)['count'];
+    }
+    return 0;
+}
+
+function getPostsCount($status){
+    global $connection;
+    
+    $count_qs = "SELECT count(*) AS count FROM posts WHERE post_status = '{$status}'";
+    $count_q = mysqli_query($connection, $count_qs);
+    
+    if($count_q){
+        return mysqli_fetch_assoc($count_q)['count'];
+    }
+    return 0;
+}
+
+function getUsersCount($status){
+    global $connection;
+    
+    $count_qs = "SELECT count(*) AS count FROM users WHERE user_status = '{$status}'";
+    $count_q = mysqli_query($connection, $count_qs);
+    
+    if($count_q){
+        return mysqli_fetch_assoc($count_q)['count'];
+    }
+    return 0;
+}
+
+function getCommentsCount($status){
+    global $connection;
+    
+    $count_qs = "SELECT count(*) AS count FROM comments WHERE comment_status = '{$status}'";
+    $count_q = mysqli_query($connection, $count_qs);
+    
+    if($count_q){
+        return mysqli_fetch_assoc($count_q)['count'];
+    }
+    return 0;
+}
+
+function getCategoriesCount(){
+    global $connection;
+    
+    $count_qs = "SELECT count(*) AS count FROM categories";
+    $count_q = mysqli_query($connection, $count_qs);
+    
+    if($count_q){
+        return mysqli_fetch_assoc($count_q)['count'];
+    }
+    return 0;
+}
+
 ?>
