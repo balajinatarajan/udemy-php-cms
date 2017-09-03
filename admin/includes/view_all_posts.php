@@ -17,13 +17,33 @@ if(!empty($_GET['showmsg'])){
             break;
         case "notUpdated": showMsgDis('Problem updating Post!','danger');
             break;
+        case "actionsuccess": showMsgDis('Bulk action successful!','success');
+            break;
         default: //nothing to do
             break;
     }
 }
 ?> 
+<form action="posts.php?action=bulk_post_action" method="post">
+<div class="row">
+   <div id="bulkOptionsContainer" class="col-xs-4">
+       <select name="bulkaction" class="form-control">
+           <option value="">Select Options</option>
+           <option value="draft">Draft</option>
+           <option value="publish">Publish</option>
+           <option value="delete">Delete</option>
+       </select>
+   </div>
+   <div class="col-xs-4">
+       <input class="btn btn-success" type="submit" name="submit" value="Apply">
+       <a href="posts.php?action=add_post" class="btn btn-primary">Add New</a>
+    </div>
+    </div>
+    
+    <br>    
 <table class="table table-bordered table-hover">
     <tr>
+        <th><input type="checkbox" id="selectAllBoxes"></th>
         <th>ID</th>
         <th>Title</th>
         <th>Category</th>
@@ -72,7 +92,11 @@ while($row = mysqli_fetch_assoc($posts)){
             $post_status_action = "<a href='posts.php?action=unapprove_post&post_id={$post_id}'>Unapprove</a></td>";
         }
 
-        echo "<tr>". printColumns([$post_id,$post_title,$post_category_title,$post_author,$post_date,$post_comment_count,$post_tags]).
+        echo "<tr>";
+        ?>
+        <td><input type="checkbox" class="checkBoxes" name="checkBoxArray[]" value="<?php echo $post_id?>"></td>
+        <?php
+        echo printColumns([$post_id,$post_title,$post_category_title,$post_author,$post_date,$post_comment_count,$post_tags]).
             "<td><a href='../images/{$post_image}' target='_blank'><img width='100' src='../images/{$post_image}' class='img-thumbnail'></a></td>".
             "<td>{$post_status}</td>".
             "<td>".$post_status_action."</td>".
@@ -81,3 +105,4 @@ while($row = mysqli_fetch_assoc($posts)){
 }
 ?>
 </table>
+</form>

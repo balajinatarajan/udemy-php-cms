@@ -19,6 +19,9 @@ function deleteUser($user_id){
 
 function addUser(){
     global $connection;
+    global $randSalt;
+    
+    //echo $randSalt;
     
     //echo "in add user";
     
@@ -32,6 +35,7 @@ function addUser(){
 
         $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
         $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+        $user_password = crypt($user_password, $randSalt);
         $user_role = mysqli_real_escape_string($connection,$_POST['user_role']);
 
         //move uploaded file to server
@@ -53,8 +57,49 @@ function addUser(){
     }
 }
 
+function registerUser(){
+    global $connection;
+    global $randSalt;
+    
+    //echo "in add user";
+    
+    if(isset($_POST['submit'])){
+        $username = mysqli_real_escape_string($connection,$_POST['username']);
+        $user_firstname = mysqli_real_escape_string($connection,$_POST['user_firstname']);
+        $user_lastname = mysqli_real_escape_string($connection,$_POST['user_lastname']);
+
+//        $user_image = $_FILES['user_image']['name'];
+//        $user_image_temp = $_FILES['user_image']['tmp_name'];
+
+        $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
+        $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+
+        $user_password = crypt($user_password, $randSalt);
+
+//        $user_role = mysqli_real_escape_string($connection,$_POST['user_role']);
+
+        //move uploaded file to server
+//        move_uploaded_file($user_image_temp, "../images/$user_image");
+
+        //insert user
+        $insert_user = "INSERT INTO users(username, user_password, user_firstname, user_lastname, user_email, user_role, created_date) ";
+        $insert_user .= "VALUES ('{$username}', '{$user_password}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', 'subscriber', now())";
+
+        $insert_user_query = mysqli_query($connection, $insert_user);
+        if($insert_user_query){
+            header('Location: http://localhost:8888/cms?showmsg=registered');
+            //showMsg('User Successfully created!','success');
+        } else {
+            //header('Location: http://localhost:8888/cms?showmsg=registerfailed');
+            //showMsg("Problem creating new user!".mysqli_error($connection),'danger');
+        }
+
+    }
+}
+
 function editUser(){
     global $connection;
+    global $randSalt;
     
     if(isset($_POST['edit_user'])){
         $user_id = mysqli_real_escape_string($connection,$_POST['user_id']);
@@ -72,6 +117,7 @@ function editUser(){
 
         $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
         $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+        $user_password = crypt($user_password, $randSalt);
         $user_role = mysqli_real_escape_string($connection,$_POST['user_role']);
         $user_status = mysqli_real_escape_string($connection,$_POST['user_status']);
 
@@ -128,6 +174,8 @@ if(!empty($_GET['action'])){
             case "add_user_action": addUser();
                     break;
             case "edit_user_action": editUser();
+                    break;
+            case "register_action": registerUser();
                     break;
             default: //nothing to do
                 break;

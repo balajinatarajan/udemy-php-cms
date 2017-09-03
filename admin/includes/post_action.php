@@ -45,6 +45,54 @@ function deletePost($post_id){
     }
 }
 
+/* pure functions */
+function update_PostStatus($post_id, $status){
+    global $connection;
+    
+    $post_id = mysqli_real_escape_string($connection, $post_id);
+    
+    if(!empty($post_id)){
+        $update_qs = "UPDATE posts SET post_status = '{$status}' WHERE post_id = {$post_id}";
+        $update_q = mysqli_query($connection, $update_qs);
+        if($update_q){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function delete_Post($post_id){
+    global $connection;
+    
+    $post_id = mysqli_real_escape_string($connection, $post_id);
+    if(!empty($post_id)){
+        $post_image = '';
+        $select_post_image = "SELECT post_image FROM posts WHERE post_id = {$post_id}";
+        $query = mysqli_query($connection, $select_post_image);
+
+        while($row = mysqli_fetch_assoc($query)){
+            $post_image = $row['post_image'];
+        }
+        //delete image
+        if($post_image != '' && !empty($post_image)){
+           // unlink("../images/".$post_image);
+            //other posts could share this image
+        }
+        //delete asset
+        $delete = "DELETE FROM posts WHERE post_id = {$post_id}";
+        if(mysqli_query($connection, $delete)){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 function addPost(){
     global $connection;
     
@@ -127,6 +175,28 @@ function editPost(){
     }
 }
 
+function bulkPost(){
+    global $connection;
+    
+    if(isset($_POST['checkBoxArray'])){
+        foreach($_POST['checkBoxArray'] as $post_id){
+            switch($_POST['bulkaction']){
+                case 'draft': update_PostStatus($post_id, 'draft');
+                    header('Location: http://localhost:8888/cms/admin/posts.php?showmsg=actionsuccess');
+                    break;
+                case 'publish': update_PostStatus($post_id, 'publish');
+                    header('Location: http://localhost:8888/cms/admin/posts.php?showmsg=actionsuccess');
+                    break;
+                case 'delete': delete_Post($post_id);
+                    header('Location: http://localhost:8888/cms/admin/posts.php?showmsg=actionsuccess');
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
 function getPostID(){
     global $connection;
     $post_id = mysqli_real_escape_string($connection, $_GET['post_id']);
@@ -153,6 +223,8 @@ if(!empty($_GET['action'])){
             case "add_post_action": addPost();
                     break;
             case "edit_post_action": editPost();
+                    break;
+            case "bulk_post_action": bulkPost();
                     break;
             default: //nothing to do
                 break;

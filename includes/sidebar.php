@@ -31,6 +31,10 @@
                 //showMsgDis('Login Successful!','success');
             } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'userpending'){
                 showMsgDis('Your account needs approval! Please contact admin.','danger');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'registered'){
+                showMsgDis('Your registration has been submitted for approval!','success');
+            } else if(!empty($_GET['showmsg']) && $_GET['showmsg'] == 'registerfailed'){
+                showMsgDis('Oops! something went wrong!','danger');
             }
             ?>
 
@@ -40,11 +44,12 @@
                 <div class="form-group">
                     <input name="username" type="text" placeholder="Enter Username" class="form-control" required>
                 </div>
-                <div class="input-group">
+                <div class="form-group">
                     <input name="password" type="password" placeholder="Enter Password" class="form-control" required>
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" name="login" type="submit">Login</button>
-                    </span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" name="login" type="submit">Login</button>&nbsp;
+                    <a class="btn btn-danger" href="registration.php">Register</a>
                 </div>
             </form>
             <?php } else {

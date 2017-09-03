@@ -1,8 +1,11 @@
 <?php include "db.php"; ?>
+<?php include "properties.php"; ?>
 <?php
 if(isset($_POST['login'])){
     $username = mysqli_real_escape_string($connection,$_POST['username']);
     $password = mysqli_real_escape_string($connection,$_POST['password']);
+    $password = crypt($password, $randSalt);
+
     if(!empty($username) && !empty($password)){
         $login_qs = "SELECT * FROM users WHERE username = '{$username}' AND user_password = '{$password}'";
         $login_q = mysqli_query($connection, $login_qs);
